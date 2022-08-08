@@ -18,7 +18,7 @@ public class SpringBootMasterApplication {
 		return new Customer(1L, "James Bond");
 	}
 
-	class Customer{
+	static class Customer{
 		private final Long id;
 		private final String name;
 
