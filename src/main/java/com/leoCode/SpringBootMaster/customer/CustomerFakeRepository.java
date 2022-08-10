@@ -1,11 +1,11 @@
 package com.leoCode.SpringBootMaster.customer;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.Arrays;
 import java.util.List;
 
-@Component(value = "fake")
+@Repository
 public class CustomerFakeRepository implements CustomerRepo {
 
     @Override
@@ -16,8 +16,7 @@ public class CustomerFakeRepository implements CustomerRepo {
         );
     }
 }
-
 /*
-    We can add a value within the parenthesis in the @Component
+    We can add a value within the parenthesis in the @Repository
     annotation to set a name to the bean.
  */
