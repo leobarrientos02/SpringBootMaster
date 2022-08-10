@@ -13,27 +13,4 @@ public class SpringBootMasterApplication {
 		SpringApplication.run(SpringBootMasterApplication.class, args);
 	}
 
-	@GetMapping
-	Customer getCustomer(){
-		return new Customer(1L, "James Bond");
-	}
-
-	static class Customer{
-		private final Long id;
-		private final String name;
-
-		Customer(Long id, String name) {
-			this.id = id;
-			this.name = name;
-		}
-
-		public Long getId() {
-			return id;
-		}
-
-		public String getName() {
-			return name;
-		}
-	}
-
 }
