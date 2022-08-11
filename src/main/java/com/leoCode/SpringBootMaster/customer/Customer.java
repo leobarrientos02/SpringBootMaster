@@ -3,17 +3,28 @@ package com.leoCode.SpringBootMaster.customer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 public class Customer {
 
     private final Long id;
+    @NotBlank(message = "please provide a name")
     private final String name;
+    @NotBlank(message = "please provide a password")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private final String password;
 
-    Customer(Long id, String name, String password) {
+    @NotBlank(message = "please provide an email")
+    @Email
+    private final String email;
+
+    Customer(Long id, String name, String password, String email) {
         this.id = id;
         this.name = name;
         this.password = password;
+        this.email = email;
     }
 
     @JsonProperty("customerId")
@@ -33,12 +44,17 @@ public class Customer {
         return password;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 }
@@ -62,4 +78,12 @@ public class Customer {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) on the variable that
     haves its getter method ignored. This is great for hiding information that
     we do not want to pass in the JSON object such as a user's password.
+
+    We can use @NotNull and @NotBlank to ensure specific data gets passed
+    in the json request body. These only work when we use the @Valid
+    annotation on the request body.
+
+    We can use the @Email annotation to perform email validation very
+    easily. You can also add regex expression within it to customize
+    your email validation form.
  */

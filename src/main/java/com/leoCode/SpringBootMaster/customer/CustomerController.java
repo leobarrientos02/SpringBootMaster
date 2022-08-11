@@ -3,6 +3,7 @@ package com.leoCode.SpringBootMaster.customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -26,7 +27,7 @@ public class CustomerController {
         return customerService.getCustomer(id);
     }
     @PostMapping
-    public void createNewCustomer(@RequestBody Customer customer){
+    public void createNewCustomer(@Valid @RequestBody Customer customer){
         System.out.println("POST REQUEST");
         System.out.println(customer);
     }
@@ -58,4 +59,7 @@ public class CustomerController {
 
     We can use the @Deprecated annotation to tell the Spring application
     that the controller is no longer supported.
+
+    We can use the @Valid annotation to ensure the request body is in the
+    format we want it to be.
 */
