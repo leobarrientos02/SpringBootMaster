@@ -3,16 +3,16 @@ package com.leoCode.SpringBootMaster.customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/v1/customers")
-@Deprecated
-public class CustomerController {
+@RequestMapping(path = "api/v2/customers")
+public class CustomerControllerV2 {
 
     private final CustomerService customerService;
     @Autowired
-    public CustomerController(CustomerService customerService) {
+    public CustomerControllerV2(CustomerService customerService) {
         this.customerService = customerService;
     }
 
@@ -22,9 +22,10 @@ public class CustomerController {
     }
 
     @GetMapping(path = "{customerId}")
-    public Customer getCustomer(@PathVariable("customerId") Long id) {
+    public Customer getCustomer(@PathVariable("customerId") Long id){
         return customerService.getCustomer(id);
     }
+
     @PostMapping
     public void createNewCustomer(@RequestBody Customer customer){
         System.out.println("POST REQUEST");
@@ -55,7 +56,4 @@ public class CustomerController {
 
     @Autowired: It is optional, but it tells the Spring application that
     we want to inject the object in this case the CustomerService.
-
-    We can use the @Deprecated annotation to tell the Spring application
-    that the controller is no longer supported.
 */

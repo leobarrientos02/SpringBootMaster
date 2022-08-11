@@ -7,7 +7,7 @@ public class Customer {
 
     private final Long id;
     private final String name;
-
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private final String password;
 
     Customer(Long id, String name, String password) {
@@ -21,7 +21,6 @@ public class Customer {
         return id;
     }
 
-    @JsonIgnore
     public Long getCustomerId() {
         return id;
     }
@@ -29,7 +28,7 @@ public class Customer {
     public String getName() {
         return name;
     }
-
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
@@ -58,4 +57,9 @@ public class Customer {
 
     The @JsonProperty annotation can be used to change the name of the key
     in the JSON object.
+
+    If you are using @JsonIgnore on a getter method then you can use
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) on the variable that
+    haves its getter method ignored. This is great for hiding information that
+    we do not want to pass in the JSON object such as a user's password.
  */
