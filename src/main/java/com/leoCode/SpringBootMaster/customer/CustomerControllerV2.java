@@ -1,5 +1,6 @@
 package com.leoCode.SpringBootMaster.customer;
 
+import com.leoCode.SpringBootMaster.exception.ApiRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,8 +22,15 @@ public class CustomerControllerV2 {
         return customerService.getCustomers();
     }
 
-    @GetMapping(path = "{customerId}")
+    @GetMapping(path = "{customerId}/exception")
     public Customer getCustomer(@PathVariable("customerId") Long id){
+        throw new ApiRequestException(
+                "ApiRequestException for customer " + id
+        );
+    }
+
+    @GetMapping(path = "{customerId}")
+    public Customer getCustomerException(@PathVariable("customerId") Long id){
         return customerService.getCustomer(id);
     }
 

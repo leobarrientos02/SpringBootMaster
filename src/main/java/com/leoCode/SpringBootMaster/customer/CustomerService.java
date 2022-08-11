@@ -1,5 +1,6 @@
 package com.leoCode.SpringBootMaster.customer;
 
+import com.leoCode.SpringBootMaster.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,9 @@ public class CustomerService {
                 .stream()
                 .filter(customer -> customer.getId().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new IllegalStateException("Customer not found"));
+                .orElseThrow(
+                        () -> new NotFoundException(
+                                "Customer with id "+ id + " does not exist."));
     }
 }
 
@@ -40,4 +43,12 @@ public class CustomerService {
     public CustomerService(@Qualifier("fake") CustomerRepo customerRepo) {
         this.customerRepo = customerRepo;
     }
+
+    We can configure the application.properties files to display error
+    messages to the client by adding,
+        server.error.include-message=always
+        server.error.include-binding-errors=always
+        server.error.include-stacktrace=on_param
+    to on_param tells us that we can specify in the url to display the
+    stacktrace by adding '?trace=true' to the url.
 */
