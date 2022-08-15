@@ -9,24 +9,24 @@ import java.util.List;
 @Service
 public class CustomerService {
 
-    private final CustomerRepo customerRepo;
+    private final CustomerRepository customerRepository;
     @Autowired
-    public CustomerService(CustomerRepo customerRepo) {
-        this.customerRepo = customerRepo;
+    public CustomerService(CustomerRepository customerRepository) {
+
+        this.customerRepository = customerRepository;
     }
 
     public List<Customer> getCustomers(){
-        return customerRepo.getCustomers();
+        return customerRepository.findAll();
     }
 
     public Customer getCustomer(Long id){
-        return getCustomers()
-                .stream()
-                .filter(customer -> customer.getId().equals(id))
-                .findFirst()
+        return customerRepository.findById(id)
                 .orElseThrow(
-                        () -> new NotFoundException(
-                                "Customer with id "+ id + " does not exist."));
+                        ()-> new NotFoundException(
+                                "customer with id " + id + " not found"
+                        )
+                );
     }
 }
 
@@ -51,4 +51,15 @@ public class CustomerService {
         server.error.include-stacktrace=on_param
     to on_param tells us that we can specify in the url to display the
     stacktrace by adding '?trace=true' to the url.
+
+    ** Easy way to find a customer by id without SpringDataJPA
+    public Customer getCustomer(Long id){
+        return getCustomers()
+                .stream()
+                .filter(customer -> customer.getId().equals(id))
+                .findFirst()
+                .orElseThrow(
+                        () -> new NotFoundException(
+                                "Customer with id "+ id + " does not exist."));
+    }
 */

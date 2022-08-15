@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class CustomerConfig {
+public class CustomerConfiguration {
 
     @Value("${app.useFakeCustomerRepo:false}")
     private Boolean useFakeCustomerRepo;
@@ -21,9 +21,7 @@ public class CustomerConfig {
     @Bean
     CustomerRepo customerRepo(){
         System.out.println("useFakeCustomerRepo = " + useFakeCustomerRepo);
-        return useFakeCustomerRepo ?
-                new CustomerFakeRepository() :
-                new CustomerRepository();
+        return new CustomerFakeRepository();
     }
 }
 

@@ -3,28 +3,37 @@ package com.leoCode.SpringBootMaster.customer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
+
+
+@Entity
+@Table
 public class Customer {
-
-    private final Long id;
+    @Id
+    private Long id;
     @NotBlank(message = "please provide a name")
-    private final String name;
+    private String name;
     @NotBlank(message = "please provide a password")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private final String password;
+    private String password;
 
     @NotBlank(message = "please provide an email")
     @Email
-    private final String email;
+    private String email;
 
-    Customer(Long id, String name, String password, String email) {
+    public Customer(Long id, String name, String password, String email) {
         this.id = id;
         this.name = name;
         this.password = password;
         this.email = email;
+    }
+
+    public Customer() {
     }
 
     @JsonProperty("customerId")
