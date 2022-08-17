@@ -1,0 +1,35 @@
+# To run this application.properties file you need to edit configuration
+# and in program arguments add --spring.profiles.active=prod
+info:
+    app:s
+        description: Master Spring Boot
+        name: Spring Boot Master Class Course
+        version: 1.0.0
+    company:
+        name: Leo Company
+management:
+    endpoint:
+        health:
+            show-details: always
+    endpoints:
+        web:
+            exposure:
+                include: health,info,prometheus
+server:
+    error:
+        include-binding-errors: always
+        include-message: always
+        include-stacktrace: on_param
+spring:
+    datasource:
+        driverClassName: org.h2.Driver
+        password: hello
+        url: jdbc:h2:mem:testdb-prod-environment
+        username: hello
+    h2:
+        console:
+            enabled: true
+            path: /h2-prod
+    jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
+        show-sql: true
