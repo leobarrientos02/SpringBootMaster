@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-
+import java.util.Objects;
 
 
 @Entity
@@ -65,6 +65,19 @@ public class Customer {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Customer)) return false;
+        Customer customer = (Customer) o;
+        return id.equals(customer.id) && name.equals(customer.name) && password.equals(customer.password) && email.equals(customer.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, password, email);
     }
 }
 /*
