@@ -1,15 +1,20 @@
 package com.leoCode.SpringBootMaster.exception;
 
+import lombok.Data;
 import org.springframework.http.HttpStatus;
 
 import java.time.ZonedDateTime;
 
+@Data
 public class ApiException {
     private final String message;
     private final Throwable throwable;
     private final HttpStatus HttpStatus;
     private final ZonedDateTime zonedDateTime;
+}
 
+/*
+    This is before using the Lombok @Data annotation
     public ApiException(String message,
                         Throwable throwable,
                         HttpStatus httpStatus,
@@ -45,4 +50,4 @@ public class ApiException {
                 ", zonedDateTime=" + zonedDateTime +
                 '}';
     }
-}
+ */

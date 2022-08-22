@@ -1,6 +1,7 @@
 package com.leoCode.SpringBootMaster.customer;
 
 import com.leoCode.SpringBootMaster.exception.NotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@Slf4j
 public class CustomerService {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(CustomerService.class);
     private final CustomerRepository customerRepository;
     @Autowired
     public CustomerService(CustomerRepository customerRepository) {
@@ -20,7 +21,7 @@ public class CustomerService {
     }
 
     public List<Customer> getCustomers(){
-        LOGGER.info("getCustomers method was called");
+        log.info("getCustomers method was called");
         return customerRepository.findAll();
     }
 
@@ -32,7 +33,7 @@ public class CustomerService {
                             NotFoundException notFoundException = new NotFoundException(
                                     "customer with id " + id + " was not found"
                             );
-                            LOGGER.error("error in getting customer {}", id, notFoundException);
+                            log.error("error in getting customer {}", id, notFoundException);
                             return notFoundException;
                         }
                 );
@@ -80,4 +81,8 @@ public class CustomerService {
     org.slf4j, and we set it equal to the LoggerFactory.getLogger(ClassName.class);
     ex: private final static Logger LOGGER = LoggerFactory.getLogger(CustomerService.class);
         LOGGER.info("function was executed");
+
+    Using Lombok we can use the @slf4J annotation that would allow us to not need
+    to initiate a Logger object, and we can simply just use log such as
+    ex: log..info("function was executed");
 */

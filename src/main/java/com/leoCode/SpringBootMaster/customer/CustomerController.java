@@ -1,5 +1,6 @@
 package com.leoCode.SpringBootMaster.customer;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,14 +9,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/v1/customers")
+@AllArgsConstructor
 @Deprecated
 public class CustomerController {
 
     private final CustomerService customerService;
-    @Autowired
-    public CustomerController(CustomerService customerService) {
-        this.customerService = customerService;
-    }
 
     @GetMapping
     public List<Customer> getCustomers(){
@@ -62,4 +60,8 @@ public class CustomerController {
 
     We can use the @Valid annotation to ensure the request body is in the
     format we want it to be.
+
+    Using Lombok allows us to use the @AllArgsConstructor annotation
+    to remove the all args constructor from the class in which lombok
+    would generate one for us.
 */

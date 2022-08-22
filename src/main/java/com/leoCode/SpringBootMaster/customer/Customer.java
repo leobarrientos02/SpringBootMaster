@@ -2,6 +2,10 @@ package com.leoCode.SpringBootMaster.customer;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.hibernate.Hibernate;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,6 +17,9 @@ import java.util.Objects;
 
 @Entity
 @Table
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class Customer {
     @Id
     private Long id;
@@ -25,16 +32,6 @@ public class Customer {
     @NotBlank(message = "please provide an email")
     @Email
     private String email;
-
-    public Customer(Long id, String name, String password, String email) {
-        this.id = id;
-        this.name = name;
-        this.password = password;
-        this.email = email;
-    }
-
-    public Customer() {
-    }
 
     @JsonProperty("customerId")
     public Long getId() {
@@ -58,26 +55,16 @@ public class Customer {
     }
 
     @Override
-    public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Customer)) return false;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Customer customer = (Customer) o;
-        return id.equals(customer.id) && name.equals(customer.name) && password.equals(customer.password) && email.equals(customer.email);
+        return id != null && Objects.equals(id, customer.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, password, email);
+        return getClass().hashCode();
     }
 }
 /*

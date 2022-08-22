@@ -1,11 +1,16 @@
 package com.leoCode.SpringBootMaster.jsonplaceholder;
 
+import lombok.Data;
+
+@Data
 public class Post {
     private final Integer userId;
     private final Integer id;
     private final String title;
     private final String body;
-
+}
+/*
+    Before using Lombok
     public Post(Integer userId,
                 Integer id,
                 String title,
@@ -41,4 +46,4 @@ public class Post {
                 ", body='" + body + '\'' +
                 '}';
     }
-}
+ */
